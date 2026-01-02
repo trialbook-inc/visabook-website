@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  website:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: visabook-web
+    ports:
+      - "4000:4000"
+    volumes:
+      # Format: HostPath:ContainerPath
+      # Using ./ ensures it looks in the current folder
+      - ./blog/blogs.json:/usr/share/nginx/html/blog/blogs.json
+      - ./blog/images:/usr/share/nginx/html/blog/images
+      - ./blog/articles:/usr/share/nginx/html/blog/articles
+    restart: always

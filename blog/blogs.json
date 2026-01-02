@@ -1,0 +1,20 @@
+[
+    {
+        "title": "How to Apply for Express Entry",
+        "slug": "express-entry-guide",
+        "author": "VisaBook Experts",
+        "date": "October 24, 2025",
+        "image": "image-25.png",
+        "summary": "A quick summary for the main list page...",
+        "content": "<h2>Introduction</h2><p>This is the full text of your article. You can use HTML tags like <b>bold</b> or <p>paragraphs</p> inside this string.</p>"
+    },
+    {
+        "title": "How to Apply for PNP",
+        "slug": "express-entry-guide",
+        "author": "VisaBook Experts",
+        "date": "October 24, 2025",
+        "image": "image-25.png",
+        "summary": "A quick summary for the main list page...",
+        "content": "<h2>Introduction</h2><p>This is the full text of your article. You can use HTML tags like <b>bold</b> or <p>paragraphs</p> inside this string.</p>"
+    }
+]
