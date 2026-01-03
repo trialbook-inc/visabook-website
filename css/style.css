@@ -323,7 +323,7 @@ body {
 .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3); }
 
 .btn-secondary { background: var(--bg-soft); color: var(--brand-dark); border: 1px solid #e2e8f0; }
-.btn-secondary:hover { background: #f1f5f9; }
+.btn-secondary:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(171, 172, 176, 0.3); }
 
 /* --- Hero Section (The 60/40 Split) --- */
 .hero { 
@@ -423,8 +423,32 @@ h1 {
 /* Nova Experience Section */
 .nova-experience {
     padding: 8rem 0;
-    background-color: var(--bg-white);
+    background-color: #ffffff; /* Use hex to be safe */
     border-top: 1px solid #f1f5f9;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.nova-experience::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    /* Line and Dot Pattern */
+    background-image: 
+        radial-gradient(#e2e8f0 1.5px, transparent 1.5px), /* The Dots */
+        linear-gradient(to right, #f8fafc 1px, transparent 1px), /* Vertical Lines */
+        linear-gradient(to bottom, #f8fafc 1px, transparent 1px); /* Horizontal Lines */
+    
+    background-size: 40px 40px; /* Space between dots/lines */
+    
+    /* This creates the "blurred/faded" edges look without using complex masks */
+    background-repeat: repeat;
+    mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
 }
 
 .experience-layout {
@@ -564,6 +588,12 @@ h1 {
 .section-header { text-align: center; margin-bottom: 4rem; }
 .section-header h2 { font-size: 2.5rem; color: var(--brand-dark); margin-bottom: 1rem; }
 
+
+.features p { 
+    font-size: 1.15rem; 
+    color: var(--text-light); 
+}
+
 .feature-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -612,9 +642,8 @@ h1 {
     color: white;
     transform: scale(1.05);
 }
-}
 
-.card-number {
+.card .card-number {
     color: var(--brand-primary); /* Use your theme blue */
     opacity: 1;                /* Make it slightly subtle */
     font-weight: 800;
@@ -630,12 +659,13 @@ h1 {
 
 .card h3 {
     margin: 0;                   /* Remove default margins for perfect flex alignment */
-    font-size: 1.25rem;
+    font-size: 1.15rem;
 }
 
 .card p {
     color: var(--text-light);
     line-height: 1.6;
+    font-size: 1rem;
 }
 
 .card:hover { 
@@ -647,6 +677,11 @@ h1 {
 
 /* FAQ Section */
 .faq { padding: 8rem 0; background-color: var(--bg-white); }
+
+.faq p { 
+    font-size: 1.15rem; 
+    color: var(--text-light); 
+}
 
 .faq-list {
     max-width: 800px;
