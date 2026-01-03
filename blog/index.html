@@ -115,6 +115,7 @@
     <section class="blog-section">
         <div class="container">
             <div id="blog-grid" class="blog-grid"></div>
+            <div id="pagination-controls" class="pagination-container"></div>
         </div>
     </section>
 
@@ -162,44 +163,82 @@
 
     <script src="../js/script.js"></script>
     <script>
+        let allBlogs = [];
+        let currentPage = 1;
+        const itemsPerPage = 6; // Change this to set how many blogs per page
+
         async function loadBlogs() {
             try {
-                // Fetch the JSON file
                 const response = await fetch('blogs.json');
-                const blogs = await response.json();
-                
-                const grid = document.getElementById('blog-grid');
-                
-                // Clear grid (optional)
-                grid.innerHTML = '';
-
-                blogs.forEach(blog => {
-                    // Create the blog card
-                    const card = document.createElement('div');
-                    card.className = 'blog-card';
-                    
-                    // Note: images are coming from blogs/images/
-                    // Link points to articles/[slug].html
-                    card.innerHTML = `
-                        <div class="blog-image">
-                            <img src="images/${blog.image}" alt="${blog.title}">
-                        </div>
-                        <div class="blog-content">
-                            <span class="blog-date">${blog.date}</span>
-                            <h3>${blog.title}</h3>
-                            <p>${blog.summary}</p>
-                            <a href="articles/${blog.slug}.html" class="read-more">Read Article</a>
-                        </div>
-                    `;
-                    
-                    grid.appendChild(card);
-                });
+                allBlogs = await response.json();
+                renderPage(1);
             } catch (error) {
                 console.error("Error loading blogs:", error);
             }
         }
 
-        // Initialize
+        function renderPage(page) {
+            currentPage = page;
+            const grid = document.getElementById('blog-grid');
+            
+            // Calculate start and end indices
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const paginatedItems = allBlogs.slice(start, end);
+
+            // Render Cards
+            grid.innerHTML = paginatedItems.map(blog => `
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <img src="images/${blog.image}" alt="${blog.title}">
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-date">${blog.date}</span>
+                        <h3>${blog.title}</h3>
+                        <p>${blog.summary}</p>
+                        <a href="articles/${blog.slug}.html" class="read-more">Read Article</a>
+                    </div>
+                </div>
+            `).join('');
+
+            renderPaginationControls();
+            
+            // Smooth scroll back to top of the grid
+            window.scrollTo({ top: grid.offsetTop - 100, behavior: 'smooth' });
+        }
+
+        function renderPaginationControls() {
+            const controls = document.getElementById('pagination-controls');
+            const totalPages = Math.ceil(allBlogs.length / itemsPerPage);
+            
+            if (totalPages <= 1) {
+                controls.innerHTML = '';
+                return;
+            }
+
+            let html = `
+                <button onclick="renderPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''} class="page-btn arrow">
+                    &larr; Prev
+                </button>
+            `;
+
+            for (let i = 1; i <= totalPages; i++) {
+                html += `
+                    <button onclick="renderPage(${i})" class="page-btn ${i === currentPage ? 'active' : ''}">
+                        ${i}
+                    </button>
+                `;
+            }
+
+            html += `
+                <button onclick="renderPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''} class="page-btn arrow">
+                    Next &rarr;
+                </button>
+            `;
+
+            controls.innerHTML = html;
+        }
+
         loadBlogs();
     </script>
 </body>

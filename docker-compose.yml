@@ -14,4 +14,6 @@ services:
       - ./blog/blogs.json:/usr/share/nginx/html/blog/blogs.json
       - ./blog/images:/usr/share/nginx/html/blog/images
       - ./blog/articles:/usr/share/nginx/html/blog/articles
+      - ./sitemap.xml:/usr/share/nginx/html/sitemap.xml  # Add this to update sitemap when new blog is created
+      - ./robots.txt:/usr/share/nginx/html/robots.txt    # Good to mount this too
     restart: always
