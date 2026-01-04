@@ -402,6 +402,35 @@
         </div>
     </section>
 
+    <!-- Chatbot -->
+    <div id="visa-chat-widget">
+        <div id="chat-hook" class="chat-hook" onclick="toggleChat(event)">
+            <div class="hook-content">
+                 <!-- <span class="flag">🇨🇦</span> -->
+                <p>Hi 👋 I can run a free immigration eligibility assessment for you. <strong>It takes less than a minute.</strong></p>
+            </div>
+        </div>
+    
+        <div id="chat-window" class="chat-window hidden">
+            <div class="chat-header">
+                <div class="header-info">
+                    <!-- <img src="assets/images/visabook_logo.png" alt="VisaBook" class="chat-logo"> -->
+                    <div>
+                        <h4>VisaBook Assistant</h4>
+                        <span class="status">Online</span>
+                    </div>
+                </div>
+                </div>
+            <div id="chat-body" class="chat-body">
+                <div class="bot-msg">Welcome! Let's start your assessment.</div>
+            </div>
+        </div>
+    
+        <div class="chat-launcher" onclick="toggleChat(event)">
+            <img src="assets/images/favicon.ico" alt="Chat">
+        </div>
+    </div>
+
     <footer class="site-footer">
         <div class="container">
             <div class="footer-top">
