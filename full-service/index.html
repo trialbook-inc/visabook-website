@@ -222,6 +222,34 @@
         </div>
     </section>
 
+    <!-- Chatbot -->
+    <div id="visa-chat-widget">
+        <div id="chat-hook" class="chat-hook" onclick="toggleChat(event)">
+            <div class="hook-content">
+                <p id="hook-text"></p> 
+            </div>
+        </div>
+
+        <div id="chat-window" class="chat-window hidden">
+            <div class="chat-header">
+                <div class="header-info">
+                    <!-- <img src="assets/images/visabook_logo.png" alt="VisaBook" class="chat-logo"> -->
+                    <div>
+                        <h4>VisaBook Assistant</h4>
+                        <span class="status">Online</span>
+                    </div>
+                </div>
+            </div>
+            <div id="chat-body" class="chat-body"></div> 
+        </div>
+    
+        <div class="chat-launcher" onclick="toggleChat(event)">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+                <path d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/>
+            </svg>
+        </div>
+    </div>
+
     <footer class="site-footer">
         <div class="container">
             <div class="footer-top">

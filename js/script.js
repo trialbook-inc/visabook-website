@@ -66,7 +66,94 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 //Chatbot logic
-let chatData = { source: "VisaBook Website" };
+// Get the path, lowercase it, and remove the trailing slash
+let rawPath = window.location.pathname.toLowerCase();
+if (rawPath.length > 1 && rawPath.endsWith('/')) {
+    rawPath = rawPath.slice(0, -1);
+}
+
+// Ensure the root path remains "/"
+const currentPath = rawPath || "/";
+
+console.log("📍 Sanitized Path for Config:", currentPath);
+
+// Updated PAGE_CONFIG with lowercased keys
+const PAGE_CONFIG = {
+    "/full-service": {
+        hook: "Want an expert-led, stress-free application? 💼",
+        intro: "Our licensed RCICs handle everything from start to finish. We even offer a **Price Match Guarantee**—you won't find a better expert rate in Canada. What describes your situation?",
+        source: "Full Service Page"
+    },
+    "/self-service": {
+        hook: "Ready to take control of your own application? 🛠️",
+        intro: "Save thousands by doing it yourself with our professional platform guidance. Plus, our **Price Match Guarantee** ensures you get the best tools for the lowest price. What are you applying for?",
+        source: "Self Service Page"
+    },
+    "/temporary-residence": {
+        hook: "Want to visit, study, or work in Canada? 🇨🇦",
+        intro: "Temporary residence is the fastest way to get your foot in the door. Whether it's for tourism or a career jumpstart, we can check your eligibility in seconds. What’s your goal?",
+        source: "Temporary Residence Page"
+    },
+    "/work-immigration": {
+        hook: "Is a Canadian career in your future? 💼",
+        intro: "Work permits are a strategic bridge to Permanent Residency. Whether you need an employer-specific or an open permit, let's see which path fits your profile. What best describes you?",
+        source: "Work Immigration Page"
+    },
+    "/permanent-residence": {
+        hook: "Ready to call Canada your forever home? 🏠",
+        intro: "From Express Entry to PNPs, we specialize in making your dream of living in Canada a legal reality. Let's find your highest-scoring pathway. What describes you?",
+        source: "Permanent Residence Page"
+    },
+    "/sponsorship": {
+        hook: "Want to bring your family to Canada? 👨‍👩‍👧‍👦",
+        intro: "Reuniting families is at the heart of what we do. We help bring spouses, parents, and children together for good. Who are you looking to sponsor?",
+        source: "Family Sponsorship Page"
+    },
+    "/business-immigration": {
+        hook: "Launching a business in Canada? 📈",
+        intro: "Canada is looking for innovative entrepreneurs and investors to drive the economy. Secure your PR while building your startup. What describes your investment level?",
+        source: "Business Immigration Page"
+    },
+    "/appeals": {
+        hook: "Got a refusal? Don’t give up just yet. 🛑",
+        intro: "A refusal isn't always the end. Our experts specialize in Judicial Reviews and Appeal Division challenges to fight for your status. What was the reason for refusal?",
+        source: "Appeals Page"
+    },
+    "/citizenship": {
+        hook: "Ready to get your Canadian Passport? 🇨🇦",
+        intro: "The final milestone of your journey! We'll help you prepare for the test and ensure your residency requirements are perfectly documented. Are you a PR yet?",
+        source: "Citizenship Page"
+    },
+    "/pricing": {
+        hook: "Which path fits your budget? 💰",
+        intro: "Whether you want DIY tools or an expert-led Full-Service package with licensed RCICs, we have a plan for you. Which level of support are you looking for?",
+        source: "Pricing Page"
+    },
+    "/about": {
+        hook: "Want to learn how we can support your journey? 👋",
+        intro: "We have licensed immigration experts (RCICs) on board that can help you on your journey. What best describes your immigration goal?",
+        source: "About Us Page"
+    },
+    "/": {
+        hook: "Hi 👋 I can run a free eligibility assessment for you.",
+        intro: "Welcome! It takes less than a minute to see which Canadian programs you qualify for. What best describes you?",
+        source: "Landing Page"
+    }
+};
+
+// Select config with a fallback
+const activeConfig = PAGE_CONFIG[currentPath] || PAGE_CONFIG["/"];
+
+// Initialize data
+let chatData = { source: activeConfig.source };
+
+// Update the Hook text as soon as the page loads
+document.addEventListener("DOMContentLoaded", () => {
+    const hookPara = document.querySelector('#chat-hook p');
+    if (hookPara) {
+        hookPara.innerHTML = activeConfig.hook;
+    }
+});
 
 // 1. Modified Toggle Function
 function toggleChat(event) {
@@ -140,7 +227,9 @@ function nextStep(step, val = null) {
 
     switch(step) {
         case 1:
-            addMessage("What best describes you?");
+            // FIXED: Use activeConfig.intro instead of hardcoded text
+            addMessage(activeConfig.intro);
+            
             const grid = document.createElement('div');
             grid.className = 'button-grid';
             const options = ["Study in Canada", "Work in Canada", "Family sponsorship", "PR / Express Entry", "Not sure"];
@@ -215,16 +304,20 @@ async function submitToN8N(email) {
     
     // Capture IP before sending
     await getIP();
+
+    // DEBUG: View the JSON in your console
+    //console.log("Final JSON Payload for n8n:", JSON.stringify(chatData, null, 2));
     
     addMessage("Analyzing your eligibility... 🚀");
     
-    // 1. Send data to n8n
+    // Send to n8n
     try {
-        fetch('https://your-n8n-instance.com/webhook/immigration-lead', {
+        const response = await fetch('https://your-n8n-instance.com/webhook/immigration-lead', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(chatData)
         });
+        //console.log("n8n Response Status:", response.status);
     } catch (e) {
         console.error("n8n submission failed", e);
     }
