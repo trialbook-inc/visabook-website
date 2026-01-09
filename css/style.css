@@ -1218,6 +1218,147 @@ h1 {
 .chat-input:focus { border-color: var(--brand-primary); }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 
+
+/* --- Conversational Embedded Chatbot --- */
+/* Disclaimer styling */
+.assessment-disclaimer {
+    position: relative; /* Needed for absolute positioning of X */
+    font-size: 11px;
+    line-height: 1.4;
+    color: #64748b;
+    background: #f8fafc;
+    padding: 12px 30px 12px 12px; /* Extra padding on right for X */
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #f1f5f9;
+}
+
+.close-disclaimer {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: #94a3b8;
+    border: none;
+    background: none;
+    line-height: 1;
+}
+
+.close-disclaimer:hover {
+    color: #ef4444;
+}
+
+/* Helper class to hide the disclaimer */
+.disclaimer-hidden {
+    display: none !important;
+}
+
+.assessment-disclaimer a {
+    color: var(--brand-primary, #2563eb);
+    text-decoration: underline;
+}
+
+/* Container for the choice buttons */
+.button-grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 12px;
+    margin-top: 10px;
+}
+
+/* Ensure choice buttons in the grid don't have bottom margin (handled by gap) */
+.button-grid-container .carousel-btn {
+    margin-bottom: 0;
+}
+
+/* Style for the 'Next' (primary) button */
+.carousel-btn.primary-btn {
+    width: auto !important;
+    min-width: 160px; /* Slightly wider for the longer text */
+    padding: 12px 24px;
+    background-color: var(--brand-primary);
+    color: white;
+    border-radius: 12px;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.carousel-btn.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.carousel-actions {
+    display: flex;
+    justify-content: flex-end; /* Pushes button to the right */
+    margin-top: 20px; /* 20px gap from the input field */
+}
+
+.carousel-assessment-container {
+    width: 100%;
+    max-width: 450px;
+    min-height: 400px;
+    background: white;
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-stage {
+    position: relative;
+    height: 100%;
+}
+
+.experience-layout-chatbot {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+}
+
+.experience-layout-chatbot .experience-text, 
+.stat-card {
+    opacity: 1;
+    will-change: transform, opacity; /* Optimizes performance */
+}
+
+/* Animation for the cards */
+.question-card {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.question-card.exit {
+    opacity: 0;
+    transform: translateX(-100px);
+    position: absolute;
+}
+
+.question-card.enter {
+    opacity: 0;
+    transform: translateX(100px);
+}
+
+/* UI Elements inside the card */
+.question-card h3 { font-size: 20px; margin-bottom: 20px; color: #1e293b; }
+.carousel-btn { 
+    display: block; width: 100%; padding: 14px; margin-bottom: 10px;
+    border: 1.5px solid #e2e8f0; border-radius: 12px; background: white;
+    cursor: pointer; text-align: left; transition: 0.2s; font-size: 15px;
+}
+.carousel-btn:hover { border-color: var(--brand-primary); background: var(--brand-primary); color: white; }
+
+.progress-container { height: 6px; background: #f1f5f9; border-radius: 3px; margin-top: 20px; }
+.progress-bar { height: 100%; background: var(--brand-primary); width: 10%; transition: width 0.3s ease; }
+
 /* --- Footer Section --- */
 .site-footer {
     padding: 4rem 0 6rem;
