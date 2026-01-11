@@ -8,6 +8,31 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Hamburger animation
+document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.getElementById('mobile-menu');
+    const navLinks = document.querySelector('.nav-links');
+    const triggers = document.querySelectorAll('.dropdown-trigger');
+
+    // Toggle Main Menu
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        // Optional: change bars to X
+        menuToggle.classList.toggle('is-open-icon');
+    });
+
+    // Toggle Accordions
+    triggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            if (window.innerWidth <= 992) {
+                e.preventDefault();
+                const parent = trigger.closest('.dropdown');
+                parent.classList.toggle('is-open');
+            }
+        });
+    });
+});
+
 // Simple Scroll Animation Observer
 const observerOptions = {
     threshold: 0.1

@@ -329,6 +329,7 @@ body {
 .hero { 
     padding: 6rem 0; 
     background: radial-gradient(circle at top left, #f0f4ff 0%, #fff 50%); 
+    width: 100%;
 }
 
 .hero-flex {
@@ -1442,6 +1443,120 @@ h1 {
 
 .footer-right a:hover {
     color: var(--brand-dark);
+}
+
+/* Hamburger menu for Tablet & Phone */
+@media (min-width: 993px) {
+    .mobile-only-btn { display: none; }
+}
+@media (max-width: 992px) {
+    /* 1. Hamburger Icon Styling */
+    .menu-toggle {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 1001;
+    }
+    .bar {
+        width: 30px;
+        height: 3px;
+        background-color: var(--text-main);
+        transition: 0.3s;
+    }
+
+    /* 2. Main Nav Drawer (The Full-Width Menu) */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 100px 2rem 2rem 2rem;
+        gap: 1rem;
+        transform: translateY(-100%); /* Slide down from top */
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow-y: auto;
+        z-index: 1000;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+    }
+
+    .nav-links a{
+        font-size: 20px;
+    }
+
+    /* 3. Dropdown "Reset" for Mobile Accordion */
+    .dropdown {
+        width: 100%;
+        padding: 0;
+    }
+
+    .dropdown-trigger {
+        font-size: 16px;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .dropdown-item strong{
+        font-size: 16px;
+    }
+
+    .dropdown-menu {
+        /* Reset Desktop Styles */
+        position: static;    /* Stop floating */
+        opacity: 1;         /* Always visible if container is shown */
+        visibility: visible;
+        width: 100%;        /* Fill mobile width */
+        transform: none !important;
+        box-shadow: none;
+        border: none;
+        border-left: 2px solid var(--brand-primary);
+        background: transparent;
+        backdrop-filter: none;
+        
+        /* Hide by default for accordion effect */
+        display: none; 
+        padding: 0 0 0 1.5rem;
+        margin-top: 0;
+    }
+
+    /* Show when clicked */
+    .dropdown.is-open .dropdown-menu {
+        display: block;
+    }
+
+    .menu-links-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .dropdown-item p {
+        font-size: 0.85rem;
+        color: #666;
+    }
+
+    .badge-center {
+        white-space: normal !important; 
+        width: fit-content; 
+    }
+
+    .experience-layout-chatbot{
+        display: block;
+    }
+
+    .experience-text{
+        margin-bottom: 30px;
+    }
 }
 
 /* Responsive Tweak for Mobile */
