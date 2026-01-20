@@ -194,17 +194,18 @@
 
             // Render Cards
             grid.innerHTML = paginatedItems.map(blog => `
-                <div class="blog-card">
-                    <div class="blog-image">
-                        <img src="images/${blog.image}" alt="${blog.title}">
+                <a href="articles/${blog.slug}.html" class="blog-card-wrapper">
+                    <div class="blog-card">
+                        <div class="blog-image">
+                            <img src="images/${blog.image}" alt="${blog.title}">
+                        </div>
+                        <div class="blog-content">
+                            <span class="blog-date">${blog.date}</span>
+                            <h3>${blog.title}</h3>
+                            <p>${blog.summary}</p>
+                        </div>
                     </div>
-                    <div class="blog-content">
-                        <span class="blog-date">${blog.date}</span>
-                        <h3>${blog.title}</h3>
-                        <p>${blog.summary}</p>
-                        <a href="articles/${blog.slug}.html" class="read-more">Read Article</a>
-                    </div>
-                </div>
+                </a>
             `).join('');
 
             renderPaginationControls();

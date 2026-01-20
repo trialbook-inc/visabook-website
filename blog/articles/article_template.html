@@ -88,32 +88,32 @@
         </div>
     </nav>
 
-    <section id="features" class="features">
-        <div class="container">
-            <div class="section-header">
-                <h2>{{blog_title}}</h2>
+    <header class="hero">
+        <div class="container hero-flex">
+            <div class="hero-content">
+                <h1>{{blog_title}}</h1>
+                <div class="hero-btns">
+                    <a href="https://app.visabook.ai" target="_blank" class="btn btn-primary">
+                        Start your Application
+                    </a>
+                
+                    <a href="https://calendar.app.google/h2tZmbhhag6quYYBA" target="_blank" class="btn btn-secondary btn-with-icon">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 2C7.55228 2 8 2.44772 8 3V4H16V3C16 2.44772 16.4477 2 17 2C17.5523 2 18 2.44772 18 3V4H19C20.1046 4 21 4.89543 21 6V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V6C3 4.89543 3.89543 4 5 4H6V3C6 2.44772 6.44772 2 7 2ZM19 9H5V20H19V9Z" fill="currentColor"/>
+                        </svg>
+                        Book Free Consultation
+                    </a>
+                </div>
             </div>
-            <div class="hero-btns-center">
-                <a href="https://app.visabook.ai" target="_blank" class="btn btn-primary">
-                    Start your Application
-                </a>
-            
-                <a href="https://calendar.app.google/h2tZmbhhag6quYYBA" target="_blank" class="btn btn-secondary btn-with-icon">
-                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7 2C7.55228 2 8 2.44772 8 3V4H16V3C16 2.44772 16.4477 2 17 2C17.5523 2 18 2.44772 18 3V4H19C20.1046 4 21 4.89543 21 6V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V6C3 4.89543 3.89543 4 5 4H6V3C6 2.44772 6.44772 2 7 2ZM19 9H5V20H19V9Z" fill="currentColor"/>
-                    </svg>
-                    Book Free Consultation
-                </a>
+    
+            <div class="featured-image">
+                <img src="../images/{{blog_image}}" alt="{{blog_title}}">
             </div>
         </div>
-    </section>
+    </header>
 
     <section class="article-section">
         <article class="article-container">
-            <div class="featured-image">
-                <!-- <img src="../images/{{blog_image}}" alt="{{blog_title}}"> -->
-            </div>
-        
             <div class="article-content">
                 {{blog_content}}
             </div>
